@@ -70,8 +70,8 @@ public class Club
     */
     public ArrayList<Membership> purge(int month, int year) {
         ArrayList<Membership> purgeList = new ArrayList<>();
-        if(month < 1 || month > 12) {
-            System.out.println("Invalid month. Must be in the range 1 and 12");
+        if((month < 1 || month > 12) || (year < 1950 || year > 2026)) {
+            System.out.println("Invalid input for month or year.");
             return null;
         }
         else {
@@ -83,7 +83,24 @@ public class Club
                     it.remove();
                 }
             }
+            return purgeList;
         }
-        return purgeList;
+    }
+    
+    public ArrayList<Membership> altPurge(int month, int year) {
+        if((month < 1 || month > 12) || (year < 1950 || year > 2026)) {
+            System.out.println("Invalid input for month or year.");
+            return null;
+        }
+        else {
+            ArrayList<Membership> purgeList = new ArrayList<>();
+            for (Membership m : members) {
+                if (m.getMonth() == month && m.getYear() == year) {
+                    purgeList.add(m);
+                }
+            }
+            members.removeAll(purgeList);
+            return purgeList;
+        }
     }
 }
